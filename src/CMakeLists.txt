@@ -21,3 +21,4 @@ function(conan_add_executable)
 endfunction()
 
 conan_add_executable(VERBOSE NAME StreamSocket SRCS StreamSocket.cpp)
+conan_add_executable(VERBOSE NAME ServerSocket SRCS ServerSocket.cpp)
