@@ -5,9 +5,11 @@ project(Rpc VERSION 0.1.0 LANGUAGES CXX)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 function(conan_add_executable)
   set(options VERBOSE)
-  set(oneValueArgs NAME)
+  set(oneValueArgs NAME FOLDER)
   set(multiValueArgs SRCS)
   cmake_parse_arguments(TARGET "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -15,11 +17,14 @@ function(conan_add_executable)
     message(STATUS "TARGET_NAME: ${TARGET_NAME}")
   endif()
 
+  source_group(TREE ${CMAKE_CURRENT_LIST_DIR} PREFIX "" FILES ${TARGET_SRCS})
+
   add_executable(${TARGET_NAME})
   target_sources(${TARGET_NAME} PRIVATE ${TARGET_SRCS})
   target_link_libraries(${TARGET_NAME} PRIVATE ${CONAN_LIBS})
+  set_target_properties(${TARGET_NAME} PROPERTIES FOLDER CMakeTargets/${TARGET_FOLDER})
 endfunction()
 
-conan_add_executable(VERBOSE NAME StreamSocket SRCS StreamSocket.cpp)
-conan_add_executable(VERBOSE NAME ServerSocket SRCS ServerSocket.cpp)
-conan_add_executable(VERBOSE NAME DatagramSocket SRCS DatagramSocket.cpp)
+conan_add_executable(VERBOSE FOLDER "Basics" NAME StreamSocket SRCS StreamSocket.cpp)
+conan_add_executable(VERBOSE FOLDER "Basics" NAME ServerSocket SRCS ServerSocket.cpp)
+conan_add_executable(VERBOSE FOLDER "Basics" NAME DatagramSocket SRCS DatagramSocket.cpp)
