@@ -6,12 +6,13 @@
 int main(int argc, char** argv)
 {
 	Poco::Net::StreamSocket socket;
+	std::cout << "Tcp Echo Client\n\n";
 
 	try
 	{
 		Poco::Net::SocketAddress address("127.0.0.1", 32452);
 		socket.connect(address);
-		std::cout << "Tcp Echo Client\n - Connection has been connected.\n\n";
+		std::cout << "Connection has been estabilshed.\n";
 
 		while (true)
 		{
@@ -27,7 +28,7 @@ int main(int argc, char** argv)
 
 			if (bytesReceived <= 0)
 			{
-				std::cout << "Connection has been disconnected.\n";
+				std::cout << "Connection has been closed.\n";
 				break;
 			}
 

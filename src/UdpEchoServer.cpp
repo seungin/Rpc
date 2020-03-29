@@ -17,16 +17,13 @@ int main(int argc, char** argv)
 			Poco::Net::SocketAddress address;
 			int bytesReceived = socket.receiveFrom(buffer, sizeof(buffer) - 1, address);
 
-			if (bytesReceived <= 0)
+			if (bytesReceived > 0)
 			{
-				std::cout << "Connection has been disconnected.\n";
-				break;
+				std::cout << "From " << address.toString() << " " << buffer << '\n';
+
+				int length = strnlen_s(buffer, sizeof(buffer) - 1);
+				socket.sendTo(buffer, length, address);
 			}
-
-			std::cout << "From " << address.toString() << " " << buffer << '\n';
-
-			int length = strnlen_s(buffer, sizeof(buffer) - 1);
-			socket.sendTo(buffer, length, address);
 		}
 	}
 	catch (Poco::Exception& e)
