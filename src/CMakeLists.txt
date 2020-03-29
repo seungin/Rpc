@@ -29,6 +29,8 @@ conan_add_executable(VERBOSE FOLDER "Basics" NAME StreamSocket SRCS StreamSocket
 conan_add_executable(VERBOSE FOLDER "Basics" NAME ServerSocket SRCS ServerSocket.cpp)
 conan_add_executable(VERBOSE FOLDER "Basics" NAME DatagramSocket SRCS DatagramSocket.cpp)
 
+conan_add_executable(VERBOSE FOLDER "Echo" NAME NonBlockEchoClient SRCS NonBlockEchoClient.cpp)
+conan_add_executable(VERBOSE FOLDER "Echo" NAME NonBlockEchoServer SRCS NonBlockEchoServer.cpp)
 conan_add_executable(VERBOSE FOLDER "Echo" NAME TcpEchoClient SRCS TcpEchoClient.cpp)
 conan_add_executable(VERBOSE FOLDER "Echo" NAME TcpEchoServer SRCS TcpEchoServer.cpp)
 conan_add_executable(VERBOSE FOLDER "Echo" NAME UdpEchoClient SRCS UdpEchoClient.cpp)
