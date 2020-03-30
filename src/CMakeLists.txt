@@ -35,3 +35,5 @@ conan_add_executable(VERBOSE FOLDER "Echo" NAME TcpEchoClient SRCS TcpEchoClient
 conan_add_executable(VERBOSE FOLDER "Echo" NAME TcpEchoServer SRCS TcpEchoServer.cpp)
 conan_add_executable(VERBOSE FOLDER "Echo" NAME UdpEchoClient SRCS UdpEchoClient.cpp)
 conan_add_executable(VERBOSE FOLDER "Echo" NAME UdpEchoServer SRCS UdpEchoServer.cpp)
+
+conan_add_executable(VERBOSE FOLDER "Framework" NAME TcpServer SRCS TcpServer.cpp)
