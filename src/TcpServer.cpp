@@ -13,7 +13,7 @@ public:
 
 	virtual ~Session()
 	{
-		std::cout << "Session has been destroyed.\n";
+		std::cout << "Session has been closed.\n";
 	}
 
 	virtual void run() override
@@ -50,6 +50,16 @@ public:
 	}
 };
 
+void PrintServerStatus(const Poco::Net::TCPServer& server)
+{
+	std::cout << "Server Status\n";
+	std::cout << " - Threads: current( " << server.currentThreads() << " )\n";
+	std::cout << " - Connections: total( " << server.totalConnections() << " ), "
+		<< "queued( " << server.queuedConnections() << " ), "
+		<< "current( " << server.currentConnections() << " ), "
+		<< "max-concurrent( " << server.maxConcurrentConnections() << " )\n\n";
+}
+
 int main(int argc, char** argv)
 {
 	std::cout << "Tcp Server Framework\n\n";
@@ -57,12 +67,19 @@ int main(int argc, char** argv)
 	Poco::Net::SocketAddress address("127.0.0.1", 32452);
 	Poco::Net::ServerSocket serverSocket(address);
 
-	Poco::Net::TCPServer server(new SessionFactory, serverSocket);
+	auto serverParams = new Poco::Net::TCPServerParams;
+	serverParams->setMaxQueued(4);
+	serverParams->setMaxThreads(4);
+
+	Poco::Net::TCPServer server(new SessionFactory, serverSocket, serverParams);
+	std::cout << "Max Server Threads: " << server.maxThreads() << "\n\n";
+
 	server.start();
 
 	while (true)
 	{
-		Poco::Thread::sleep(1);
+		Poco::Thread::sleep(2000);
+		PrintServerStatus(server);
 	}
 
 	return 0;
