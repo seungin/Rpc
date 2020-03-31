@@ -39,3 +39,5 @@ conan_add_executable(VERBOSE FOLDER "Echo" NAME UdpEchoServer SRCS UdpEchoServer
 conan_add_executable(VERBOSE FOLDER "Framework" NAME ReactorEchoClient SRCS ReactorEchoClient.cpp)
 conan_add_executable(VERBOSE FOLDER "Framework" NAME ReactorEchoServer SRCS ReactorEchoServer.cpp)
 conan_add_executable(VERBOSE FOLDER "Framework" NAME TcpServer SRCS TcpServer.cpp)
+
+conan_add_executable(VERBOSE FOLDER "Http" NAME HttpServer SRCS HttpServer.cpp)
